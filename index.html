@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Belajar warna</title>
+    <script src="blockly_compressed.js"></script>
+    <script src="blocks_compressed.js"></script>
+    <script src="javascript_compressed.js"></script>
+    <script src="msg/js/en.js"></script>
+    <script src="customblocks.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
+    <style media="screen">
+
+      body{
+        background-color: #fff;
+      }
+      #lingkaran{
+        margin-top: 180px;
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        background-color: #fff;
+        border: solid 1px #000;
+        display: block;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container" style="padding-top:30px;">
+      <div class="row">
+        <div class="col-md-6">
+          <p>
+            <button onclick="runCode()" class="fa fa-arrow-circle-right">Jalankan </button>
+          </p>
+
+          <h4>Beri warna merah pada lingkaran</h4>
+          <!-- block -->
+          <div id="blocklyDiv" style="height:480px;"></div>
+
+          <xml id="toolbox" style="display: none;">
+            <category name="warna" colour="210">
+              <block type="warna_level1">
+                <field name="warna"></field>
+              </block>
+            </category>
+          </xml>
+        </div>
+        <div class="col-md-6">
+          <div id="lingkaran"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    var workspace = Blockly.inject('blocklyDiv',
+    {toolbox: document.getElementById('toolbox'),
+    grid:
+      {spacing: 10,
+      lenght: 20,
+      colour: 'red',
+      snap: true},
+      trashcan: true});
+
+      function runCode(){
+        window.LoopTrap = 1000;
+        Blockly.JavaScript.INFINITE_LOOP_TRAP =
+          'if (--window.LoopTrap == 0 ) throw "Infinite loop.";\n';
+        var code = Blockly.JavaScript.workspaceToCode(workspace);
+        Blockly.JavaScript.INFINITE_LOOP_TRAP = null ;
+        try {
+          eval(code)
+        } catch (e) {
+          alert(e)
+        }
+      }
+    </script>
+  </body>
+</html>
